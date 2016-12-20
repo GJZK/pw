@@ -251,7 +251,6 @@ var m3D = function () {
 				} else {
 					selected.img.style.cursor = "default";
 
-					console.log(selected);
 				}
 			}
 		}
