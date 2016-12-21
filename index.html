@@ -18,7 +18,6 @@
 
 		<h1>叶&潇潇</h1>
 		 照片墙
-		 <br/>
 		 <div id="skPlayer"></div>
 
 
@@ -27,30 +26,18 @@
 	<div id="urlInfo"></div>
 </div>
 <script>
-	 var main=document.getElementById("skPlayer");
-	    function mainDisplay(){
-	    //    alert(document.getElementById("control"));
-	        var control=document.getElementById("control");
-	        
-	        if(control.style.display=="block"){
-	            main.classList.remove("skPlayer-list-on");
-	            control.style.display="none";    
-	        }else{
-	            control.style.display="block";
-	        }
-
-	    //    console.log(main.querySelector(".skPlayer-cover"));
-	        
-	    }
     window.onload = function(){
         skPlayer({
-        //    music:317921676
-        	music:{
+                autoplay:true,
+                music:317921676
+            /*    music:{
                 src:'http://o9vplcp9o.bkt.clouddn.com/music.mp3',//音乐文件，必填
                 name:'打呼',//歌曲名称，必填
                 author:'潘玮柏&杨丞琳',//歌手，必填
                 cover:'http://o9vplcp9o.bkt.clouddn.com/cover.jpg'//专辑封面，必填
-            }
+                
+                },
+                autoplay:true*/
         });
     };
 </script>
