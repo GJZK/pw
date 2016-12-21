@@ -5,8 +5,10 @@
 <title>3D相片展示</title>
 
 <meta http-equiv="imagetoolbar" content="no">
+<link rel="stylesheet" href="css/skPlayer.css">
+<link rel="stylesheet" type="text/css" href="css/pw.css">
 
-<link rel="stylesheet" type="text/css" href="css/pw.css"/>
+<script src="js/skPlayer.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 </head>
 
@@ -16,11 +18,36 @@
 
 		<h1>叶&潇潇</h1>
 		 照片墙
+		 <br/>
+		 <div id="skPlayer"></div>
+
+
 		<div id="bar"></div>
 	</div>
 	<div id="urlInfo"></div>
 </div>
+<script>
+	 var main=document.getElementById("skPlayer");
+	    function mainDisplay(){
+	    //    alert(document.getElementById("control"));
+	        var control=document.getElementById("control");
+	        
+	        if(control.style.display=="block"){
+	            main.classList.remove("skPlayer-list-on");
+	            control.style.display="none";    
+	        }else{
+	            control.style.display="block";
+	        }
 
+	    //    console.log(main.querySelector(".skPlayer-cover"));
+	        
+	    }
+    window.onload = function(){
+        skPlayer({
+            music:317921676
+        });
+    };
+</script>
 <script type="text/javascript">
 /* ==== start script ==== */
 setTimeout(function() {

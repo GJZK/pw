@@ -74,3 +74,10 @@ body {
 	padding-left: 12px;
 	cursor: pointer;
 }
+
+.skPlayer-red#skPlayer .skPlayer-control{
+            background-color:#000000;
+        }
+.skPlayer-red#skPlayer .skPlayer-list{
+    background-color:#000000;
+}
