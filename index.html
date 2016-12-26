@@ -26,16 +26,32 @@
 <script>
     window.onload = function(){
         skPlayer({
-                autoplay:false,
-                music:317921676
-            /*    music:{
-                src:'http://o9vplcp9o.bkt.clouddn.com/music.mp3',//音乐文件，必填
-                name:'打呼',//歌曲名称，必填
-                author:'潘玮柏&杨丞琳',//歌手，必填
-                cover:'http://o9vplcp9o.bkt.clouddn.com/cover.jpg'//专辑封面，必填
-                
-                },
-                autoplay:false*/
+        /*        autoplay:true,
+                music:317921676,
+                theme:"red"
+            */
+            music:[{
+                        src:'music/钢琴曲-梦中的婚礼.mp3',//音乐文件，必填
+                        name:'梦中的婚礼',//歌曲名称，必填
+                        author:'理查德克莱德曼',//歌手，必填
+                        cover:'http://img3.kuwo.cn/star/starheads/240/8/53/3455753102.jpg'//专辑封面，必填
+                    },{
+                        src:'music/天空之城（原版)-久石让.mp3',//音乐文件，必填
+                        name:'天空之城',//歌曲名称，必填
+                        author:'久石让',//歌手，必填
+                        cover:'http://img1.kuwo.cn/star/starheads/240/31/55/671998770.jpg'//专辑封面，必填
+                    },{
+                        src:'music/至上励合 - 棉花糖.mp3',//音乐文件，必填
+                        name:'棉花糖',//歌曲名称，必填
+                        author:'至上励合',//歌手，必填
+                        cover:'http://img3.kuwo.cn/star/starheads/240/45/72/411382667.jpg'//专辑封面，必填
+                    }
+
+            ],
+            theme:"red",
+            autoplay:true,
+            loop:true
+
         });
     };
 </script>

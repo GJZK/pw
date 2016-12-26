@@ -412,15 +412,18 @@
             target.querySelector(".skPlayer-picture").addEventListener("click",function(){
                 
                 if(control.style.display=="block"){
+                    target.style.width="80px";
                     target.classList.remove("skPlayer-list-on");
                     control.style.display="none";
                 }else{
+                    target.style.width="300px";
                     control.style.display="block";
                 }
             });
             document.body.addEventListener("click",function(e){
             //    console.log(e);
                 if(e.target.id=='screen'){
+                    target.style.width="80px";
                     target.classList.remove("skPlayer-list-on");
                     control.style.display="none";
                 }
