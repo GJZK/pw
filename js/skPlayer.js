@@ -401,31 +401,61 @@
             }
             dp();
         }
+        //设置多少秒后隐藏control
+        function stdp(control){
+            control.style.opacity="0.1";
+            setTimeout(function() {
+                target.style.width="80px";
+                control.style.display="none";
+            }, 600);
+        }
         //配置自动播放   
         function dp(){
+           
+            var control=target.querySelector(".skPlayer-control");
+            control.style.transition="opacity 1s";
+            var timeout;
             if(options.autoplay){
                 target.querySelector("audio").setAttribute("autoplay","autoplay");
                 playBtn.classList.add('skPlayer-pause');
                 cover.classList.add('skPlayer-pause');
+                control.style.display="block";//如果是自动播放 3秒后隐藏
+                setTimeout(function() {
+                        stdp(control);                     
+                    }, 3000);
+            }else{
+                control.style.opacity="1";
+                control.style.display="block";
             }
-            var control=target.querySelector(".skPlayer-control");
+            
             target.querySelector(".skPlayer-picture").addEventListener("click",function(){
                 
                 if(control.style.display=="block"){
-                    target.style.width="80px";
+                    //取消延迟
+                    if(timeout>0){
+                        clearTimeout(timeout);
+                    }
                     target.classList.remove("skPlayer-list-on");
-                    control.style.display="none";
+                    stdp(control);
                 }else{
-                    target.style.width="300px";
+                    target.style.width="290px";
                     control.style.display="block";
+                    control.style.opacity="1";
+                    //如果是显示3秒后隐藏
+                    timeout=setTimeout(function() {
+                        stdp(control);
+                    }, 3000);
                 }
             });
             document.body.addEventListener("click",function(e){
             //    console.log(e);
                 if(e.target.id=='screen'){
-                    target.style.width="80px";
                     target.classList.remove("skPlayer-list-on");
-                    control.style.display="none";
+                    //取消延迟
+                    if(timeout>0){
+                        clearTimeout(timeout);
+                    }
+                    stdp(control);
                 }
             })
         }

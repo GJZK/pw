@@ -41,7 +41,8 @@ var m3D = function () {
 		return camera.s;
 	}
 	/* ==== diapo constructor ==== */
-	var Diapo = function (n, img, x, y, z) {
+	var Diapo = function (n,s,img, x, y, z) {
+
 		if (img) {
 			this.url = img.url;
 			this.title = img.title;
@@ -61,7 +62,7 @@ var m3D = function () {
 				scr.appendChild(this.img);
 			}
 			/* ---- on click event ---- */
-			this.img.onclick = function () {
+			this.img.onclick = function () {				
 				if (camera.s) return;
 				if (this.diapo.isLoaded) {
 					if (this.diapo.urlActive) {
@@ -69,10 +70,14 @@ var m3D = function () {
 						top.location.href = this.diapo.url;
 					} else {
 						/* ---- target positions ---- */
+					//	this.diapo.css.opacity="1";
+					//	this.diapo.css.display="block";
+						
+						
+						
 						camera.tz = this.diapo.z - camera.fov;
 						camera.tx = this.diapo.x;
 						camera.ty = this.diapo.y;
-
 						/* ---- disable previously selected img ---- */
 						if (selected) {
 							selected.but.className = "button viewed";
@@ -80,22 +85,37 @@ var m3D = function () {
 							selected.img.style.cursor = "pointer";
 							selected.urlActive = false;
 							urlInfo.style.visibility = "hidden";
+							//判断当前点击的是不是已经选中的（正看的） 
+							if(selected.srcImg.src==this.diapo.srcImg.src){
+								var d=this.diapo;
+								this.diapo.css.opacity="0.1";
+					            setTimeout(function() {
+					                d.css.display="none";
+					                d.z=(n+1)*(5000/s)+camera.fov;
+					            }, 600);
+								
+							}
+
 						}
+						
 						/* ---- select current img ---- */
 						this.diapo.but.className = "button selected";
 						interpolation(false);
 						selected = this.diapo;
 					}
 				}
+				
 			}
 			/* ---- command bar buttons ---- */
+
 			this.but = document.createElement('div');
 			this.but.className = "button";
 			bar.appendChild(this.but);
 			this.but.diapo = this;
-			this.but.style.left = Math.round((this.but.offsetWidth  * 1.2) * (n % 4)) + 'px';
-			this.but.style.top  = Math.round((this.but.offsetHeight * 1.2) * Math.floor(n / 4)) + 'px';
+			this.but.style.left = Math.round((this.but.offsetWidth+3) * (n % 4)) + 'px';
+			this.but.style.top  = Math.round((this.but.offsetHeight+3) * Math.floor(n / 4)) + 'px';
 			this.but.onclick = this.img.onclick;
+			document.getElementById("bar").style.width=(this.but.offsetWidth+3)*4+'px';
 			imb = this.img;
 			this.img.diapo = this;
 			this.zi = 25000;
@@ -132,6 +152,7 @@ var m3D = function () {
 			this.css.width  = Math.round(w)+ 'px';
 			this.css.height = Math.round(h)+ 'px';
 			this.css.zIndex = this.zi - Math.round(z);
+			this.css.transition="opacity 1s";
 		} else {
 			/* ---- image is loaded? ---- */
 			this.isLoaded = this.loading();
@@ -201,18 +222,20 @@ var m3D = function () {
 			var x = 1000 * ((i % 4) - 1.5);
 			var y = Math.round(Math.random() * 4000) - 2000;
 			var z = i * (5000 / n);
-			diapo.push( new Diapo(i - 1, o, x, y, z));
+			diapo.push( new Diapo(i - 1,n, o, x, y, z));
 			/* ---- transparent frames ---- */
 			var k = diapo.length - 1;
 			for (var j = 0; j < 3; j++) {
 				var x = Math.round(Math.random() * 4000) - 2000;
 				var y = Math.round(Math.random() * 4000) - 2000;
-				diapo.push( new Diapo(k, null, x, y, z + 100));
+				diapo.push( new Diapo(k,n,null, x, y, z + 100));
 			}
 		}
 		/* ---- start engine ---- */
+	//	console.log(diapo.length);
 		run();
 	}
+
 	////////////////////////////////////////////////////////////////////////////
 	/* ==== main loop ==== */
 	var run = function () {
@@ -249,16 +272,24 @@ var m3D = function () {
 					urlInfo.style.top = Math.round(selected.img.offsetTop + selected.img.offsetHeight - urlInfo.offsetHeight - 5) + "px";
 					urlInfo.style.left = Math.round(selected.img.offsetLeft + selected.img.offsetWidth - urlInfo.offsetWidth - 5) + "px";
 				} else {
-					selected.img.style.cursor = "default";
-
+					selected.img.style.cursor = "pointer";
+				
+					//把其他隐藏的显示
+					for(var i=0;i<diapo.length;i++){
+						if(diapo[i].srcImg&&diapo[i]!=selected){
+							diapo[i].css.display="block";
+							diapo[i].css.opacity="1";									
+						}
+					}
 				}
 			}
 		}
 		/* ---- anim images ---- */
 		var i = 0, o;
+
 		while( o = diapo[i++] ) o.anim();
 		/* ---- loop ---- */
-		setTimeout(run, 25);
+		setTimeout(run,25);
 	}
 	return {
 		////////////////////////////////////////////////////////////////////////////
