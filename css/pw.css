@@ -71,7 +71,7 @@ body {
 }
 #urlInfo {
 	position: absolute;
-	background: url(images/r.gif) no-repeat 0 4px;
+	background: url(../images/r.gif) no-repeat 0 4px;
 	visibility: hidden;
 	z-index: 30000;
 	padding-left: 12px;
