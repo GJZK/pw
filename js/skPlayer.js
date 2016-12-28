@@ -403,6 +403,9 @@
         }
         //设置多少秒后隐藏control
         function stdp(control){
+            if(target.classList.contains('skPlayer-list-on')){
+                target.classList.remove("skPlayer-list-on");
+            }
             control.style.opacity="0.1";
             setTimeout(function() {
                 target.style.width="80px";
