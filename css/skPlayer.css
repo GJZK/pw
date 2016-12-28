@@ -122,6 +122,7 @@
     position:relative;
     z-index:2;
     display:none;
+    transition:opacity 1s;
 }
 #skPlayer.skPlayer-red .skPlayer-control{
     background-color:transparent;
@@ -320,7 +321,7 @@
     display:block;
 }
 #skPlayer.skPlayer-red .skPlayer-list{
-    background-color: #fff;
+    background-color: #000;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
     top:88px;
 }

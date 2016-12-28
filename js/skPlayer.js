@@ -37,6 +37,9 @@
     };
     //对象主体
     skPlayer = function(options){
+        var music = options.music,
+            target = document.getElementById('skPlayer');
+        
         //配置检测
         if(Array.isArray(options.music)){
             for(var item in options.music){
@@ -45,10 +48,8 @@
                     return;
                 }
             }
-
             //初始化
-            var music = options.music,
-                target = document.getElementById('skPlayer'),
+            var 
                 HTMLcontent = '<audio src="' + music[0].src + '" preload="auto"></audio>';
                 HTMLcontent+= '<div class="skPlayer-picture">';
                 HTMLcontent+= '    <img src="' + music[0].cover + '" alt="" class="skPlayer-cover">';
@@ -91,26 +92,8 @@
             if(options.theme === 'red'){
                 target.className = 'skPlayer-red';
             }
-            var audio = target.querySelector('audio'),
-                playBtn = target.querySelector('.skPlayer-play-btn'),
-                currentTime = target.querySelector('.skPlayer-percent').querySelector('.skPlayer-line'),
-                totalTime = target.querySelector('.skPlayer-percent'),
-                currentVolume = target.querySelector('.skPlayer-volume').querySelector('.skPlayer-line'),
-                totalVolume = target.querySelector('.skPlayer-volume').querySelector('.skPlayer-percent'),
-                quietVolume = target.querySelector('.skPlayer-icon'),
-                currentTime_text = target.querySelector('.skPlayer-cur'),
-                totalTime_text = target.querySelector('.skPlayer-total'),
-                cover = target.querySelector('.skPlayer-cover');
-            if(Array.isArray(music)){
-                var musicItem = target.querySelectorAll('.skPlayer-list li');
-                var listSwitch = target.querySelector('.skPlayer-list-switch');
-            //    target.classList.add('skPlayer-list-on');
-            }
-
             var duration;
 
-            //事件绑定
-            handleEvent();
 
         }else if(typeof options.music === 'object'){
             if(!(options.music.src && options.music.name && options.music.author && options.music.cover)){
@@ -119,8 +102,7 @@
             }
 
             //初始化
-            var music = options.music,
-                target = document.getElementById('skPlayer'),
+            var 
                 HTMLcontent = '<audio src="' + music.src + '" preload="auto"></audio>';
                 HTMLcontent+= '<div class="skPlayer-picture">';
                 HTMLcontent+= '    <img src="' + music.cover + '" alt="唱片图片" class="skPlayer-cover">';
@@ -150,26 +132,9 @@
             if(options.theme === 'red'){
                 target.className = 'skPlayer-red';
             }
-            var audio = target.querySelector('audio'),
-                playBtn = target.querySelector('.skPlayer-play-btn'),
-                currentTime = target.querySelector('.skPlayer-percent').querySelector('.skPlayer-line'),
-                totalTime = target.querySelector('.skPlayer-percent'),
-                currentVolume = target.querySelector('.skPlayer-volume').querySelector('.skPlayer-line'),
-                totalVolume = target.querySelector('.skPlayer-volume').querySelector('.skPlayer-percent'),
-                quietVolume = target.querySelector('.skPlayer-icon'),
-                currentTime_text = target.querySelector('.skPlayer-cur'),
-                totalTime_text = target.querySelector('.skPlayer-total'),
-                cover = target.querySelector('.skPlayer-cover');
-            if(Array.isArray(music)){
-                var musicItem = target.querySelectorAll('.skPlayer-list li');
-                var listSwitch = target.querySelector('.skPlayer-list-switch');
-            //    target.classList.add('skPlayer-list-on');
-            }
-
             var duration;
 
             //事件绑定
-            handleEvent();
         }else if(typeof options.music === 'number'){
             var music,target,audio,playBtn,currentTime,totalTime,currentVolume,totalVolume,quietVolume,currentTime_text,totalTime_text,cover,duration,musicItem,listSwitch;
             var sign = false;
@@ -221,22 +186,6 @@
                     if(options.theme === 'red'){
                         target.className = 'skPlayer-red';
                     }
-                    audio = target.querySelector('audio');
-                    playBtn = target.querySelector('.skPlayer-play-btn');
-                    currentTime = target.querySelector('.skPlayer-percent').querySelector('.skPlayer-line');
-                    totalTime = target.querySelector('.skPlayer-percent');
-                    currentVolume = target.querySelector('.skPlayer-volume').querySelector('.skPlayer-line');
-                    totalVolume = target.querySelector('.skPlayer-volume').querySelector('.skPlayer-percent');
-                    quietVolume = target.querySelector('.skPlayer-icon');
-                    currentTime_text = target.querySelector('.skPlayer-cur');
-                    totalTime_text = target.querySelector('.skPlayer-total');
-                    cover = target.querySelector('.skPlayer-cover');
-                    musicItem = target.querySelectorAll('.skPlayer-list li');
-                    listSwitch = target.querySelector('.skPlayer-list-switch');
-                //    target.classList.add('skPlayer-list-on');
-
-                    //事件绑定
-                    handleEvent();
 
                 },
                 fail:function(status){
@@ -249,6 +198,23 @@
             }
         }
 
+        var audio = target.querySelector('audio'),
+                playBtn = target.querySelector('.skPlayer-play-btn'),
+                currentTime = target.querySelector('.skPlayer-percent').querySelector('.skPlayer-line'),
+                totalTime = target.querySelector('.skPlayer-percent'),
+                currentVolume = target.querySelector('.skPlayer-volume').querySelector('.skPlayer-line'),
+                totalVolume = target.querySelector('.skPlayer-volume').querySelector('.skPlayer-percent'),
+                quietVolume = target.querySelector('.skPlayer-icon'),
+                currentTime_text = target.querySelector('.skPlayer-cur'),
+                totalTime_text = target.querySelector('.skPlayer-total'),
+                cover = target.querySelector('.skPlayer-cover');
+        if(Array.isArray(music)){
+            var musicItem = target.querySelectorAll('.skPlayer-list li');
+            var listSwitch = target.querySelector('.skPlayer-list-switch');
+        //    target.classList.add('skPlayer-list-on');
+        }
+         //事件绑定
+        handleEvent();
         //可播放状态
         function canPlayThrough(){
             if(options.loop === true){
@@ -383,9 +349,9 @@
         }
         //事件绑定函数
         function handleEvent(){
-            //audio.addEventListener('canplaythrough', canPlayThrough);
+            audio.addEventListener('canplaythrough', canPlayThrough);
             playBtn.addEventListener('click', playClick);
-            audio.addEventListener('canplay', canPlayThrough);
+        //    audio.addEventListener('canplay', canPlayThrough);
             audio.addEventListener('durationchange', durationChange);
             audio.addEventListener('timeupdate', timeUpdate);
             audio.addEventListener('ended', audioEnd);
@@ -401,66 +367,70 @@
             }
             dp();
         }
+        
+
         //设置多少秒后隐藏control
-        function stdp(control){
-            if(target.classList.contains('skPlayer-list-on')){
-                target.classList.remove("skPlayer-list-on");
-            }
-            control.style.opacity="0.1";
-            setTimeout(function() {
-                target.style.width="80px";
-                control.style.display="none";
-            }, 600);
+        function stdp(){
+            return setTimeout(function(){
+                var control=target.querySelector(".skPlayer-control");
+                if(target.classList.contains('skPlayer-list-on')){
+                    target.classList.remove("skPlayer-list-on");
+                }
+                control.style.opacity="0.1";
+                setTimeout(function() {
+                    target.style.width="80px";
+                    control.style.display="none";
+                }, 600);
+            },3000);
         }
         //配置自动播放   
         function dp(){
            
             var control=target.querySelector(".skPlayer-control");
-            control.style.transition="opacity 1s";
+            var list=target.querySelector(".skPlayer-list");
             var timeout;
             if(options.autoplay){
-                target.querySelector("audio").setAttribute("autoplay","autoplay");
-                playBtn.classList.add('skPlayer-pause');
-                cover.classList.add('skPlayer-pause');
-                control.style.display="block";//如果是自动播放 3秒后隐藏
-                setTimeout(function() {
-                        stdp(control);                     
-                    }, 3000);
+                playClick();
+                control.style.opacity="0.1";
             }else{
-                control.style.opacity="1";
+                
                 control.style.display="block";
+                //如果不是自动播放 3秒后隐藏
+                stdp();                     
             }
-            
-            target.querySelector(".skPlayer-picture").addEventListener("click",function(){
+            //鼠标放到图片上显示歌曲信息
+            target.querySelector(".skPlayer-picture").addEventListener("mouseover",function(){
                 
                 if(control.style.display=="block"){
-                    //取消延迟
+                    //取消延迟3秒消失
                     if(timeout>0){
                         clearTimeout(timeout);
                     }
-                    target.classList.remove("skPlayer-list-on");
-                    stdp(control);
                 }else{
                     target.style.width="290px";
                     control.style.display="block";
                     control.style.opacity="1";
                     //如果是显示3秒后隐藏
-                    timeout=setTimeout(function() {
-                        stdp(control);
-                    }, 3000);
+                    timeout=stdp();
                 }
             });
-            document.body.addEventListener("click",function(e){
-            //    console.log(e);
-                if(e.target.id=='screen'){
-                    target.classList.remove("skPlayer-list-on");
-                    //取消延迟
-                    if(timeout>0){
-                        clearTimeout(timeout);
-                    }
-                    stdp(control);
+            control.onmouseover=function(){
+                if(timeout){
+                    clearTimeout(timeout);
                 }
-            })
+            }
+            control.onmouseout=function(){
+                timeout=stdp();
+            }
+            list.onmouseover=function(){
+                if(timeout){
+                    clearTimeout(timeout);
+                }
+            }
+            list.onmouseout=function(){
+                 timeout=stdp();
+            }
+            
         }
 
     };

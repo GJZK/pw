@@ -39,7 +39,6 @@ body {
 	position:absolute;
 	left: 1em;
 	top: 1em;
-	width: 100px;
 	z-index: 30000;
 	background:#000;
 	border: #000 solid 1em;
@@ -78,9 +77,16 @@ body {
 	cursor: pointer;
 }
 
-.skPlayer-red#skPlayer .skPlayer-control{
-            background-color:#000000;
-        }
-.skPlayer-red#skPlayer .skPlayer-list{
-    background-color:#000000;
+.canva{
+	transform: scale(1);
+	transition: opacity 1s,transform 1s ease 0s;
+	-webkit-transform: scale(1);
+	-webkit-transform: opacity 1s,-webkit-transform 1s ease 0s;
+}
+			
+.canva:hover{
+	transform: scale(1.2);
+	transition: opacity 1s,transform 1s ease 0s;
+	-webkit-transform: scale(1.2);
+	-webkit-transform: opacity 1s,-webkit-transform 1s ease 0s;
 }

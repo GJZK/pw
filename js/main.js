@@ -1,12 +1,3 @@
-// =============================================================
-//           ===== 3D gallery experiment =====
-// script written by Gerard Ferrandez - April 5, 2010
-// http://www.dhteumeuleu.com
-// use under a CC-BY-NC license
-// -------------------------------------------------------------
-// update: April 17 : added hyperlinks, tweaked z-index
-// =============================================================
-
 var m3D = function () {
 	/* ---- private vars ---- */
 	var diapo = [],
@@ -54,11 +45,13 @@ var m3D = function () {
 				this.srcImg.src = imagesPath + img.src;
 				this.img = document.createElement("canvas");
 				this.canvas = true;
+				this.img.className="canva";
 				scr.appendChild(this.img);
 			} else {
 				/* ---- normal image ---- */
 				this.img = document.createElement('img');
 				this.img.src = imagesPath + img.src;
+				this.img.className="canva";
 				scr.appendChild(this.img);
 			}
 			/* ---- on click event ---- */
@@ -70,18 +63,13 @@ var m3D = function () {
 						top.location.href = this.diapo.url;
 					} else {
 						/* ---- target positions ---- */
-					//	this.diapo.css.opacity="1";
-					//	this.diapo.css.display="block";
-						
-						
-						
 						camera.tz = this.diapo.z - camera.fov;
 						camera.tx = this.diapo.x;
 						camera.ty = this.diapo.y;
 						/* ---- disable previously selected img ---- */
 						if (selected) {
 							selected.but.className = "button viewed";
-							selected.img.className = "";
+						//	selected.img.className = "";
 							selected.img.style.cursor = "pointer";
 							selected.urlActive = false;
 							urlInfo.style.visibility = "hidden";
@@ -93,9 +81,7 @@ var m3D = function () {
 					                d.css.display="none";
 					                d.z=(n+1)*(5000/s)+camera.fov;
 					            }, 600);
-								
 							}
-
 						}
 						
 						/* ---- select current img ---- */
@@ -104,10 +90,8 @@ var m3D = function () {
 						selected = this.diapo;
 					}
 				}
-				
 			}
 			/* ---- command bar buttons ---- */
-
 			this.but = document.createElement('div');
 			this.but.className = "button";
 			bar.appendChild(this.but);
@@ -152,7 +136,6 @@ var m3D = function () {
 			this.css.width  = Math.round(w)+ 'px';
 			this.css.height = Math.round(h)+ 'px';
 			this.css.zIndex = this.zi - Math.round(z);
-			this.css.transition="opacity 1s";
 		} else {
 			/* ---- image is loaded? ---- */
 			this.isLoaded = this.loading();
@@ -166,9 +149,6 @@ var m3D = function () {
 				if(this.srcImg.height>=document.body.clientHeight||this.srcImg.width>=document.body.clientWidth){
 					this.h =document.body.clientHeight*0.7
 					this.w = this.srcImg.width*(document.body.clientHeight*0.7)/this.srcImg.height;
-				//	this.w = this.srcImg.width*0.7;
-				//	this.h = this.srcImg.height*0.7;
-
 				}else{
 					this.w = this.srcImg.width;
 					this.h = this.srcImg.height;
@@ -232,7 +212,6 @@ var m3D = function () {
 			}
 		}
 		/* ---- start engine ---- */
-	//	console.log(diapo.length);
 		run();
 	}
 
@@ -260,8 +239,6 @@ var m3D = function () {
 				/* ---- activate hyperlink ---- */
 				if (selected.url) {
 					selected.img.style.cursor = "pointer";
-				//	selected.img.style.height = 400;
-
 					selected.urlActive = true;
 					selected.img.className = "href";
 					urlInfo.diapo = selected;
@@ -286,7 +263,6 @@ var m3D = function () {
 		}
 		/* ---- anim images ---- */
 		var i = 0, o;
-
 		while( o = diapo[i++] ) o.anim();
 		/* ---- loop ---- */
 		setTimeout(run,25);
