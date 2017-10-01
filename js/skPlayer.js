@@ -52,7 +52,7 @@
             var 
                 HTMLcontent = '<audio src="' + music[0].src + '" preload="auto"></audio>';
                 HTMLcontent+= '<div class="skPlayer-picture">';
-                HTMLcontent+= '    <img src="' + music[0].cover + '" alt="" class="skPlayer-cover">';
+                HTMLcontent+= '    <img src="' + music[0].cover + '" alt="唱片图片" class="skPlayer-cover">';
                 HTMLcontent+= '    <a href="javascript:;" class="skPlayer-play-btn">';
                 HTMLcontent+= '        <span class="skPlayer-left"></span>';
                 HTMLcontent+= '        <span class="skPlayer-right"></span>';
@@ -146,7 +146,7 @@
                         target = document.getElementById('skPlayer');
                     var HTMLcontent = '<audio src="' + music[0].src + '" preload="auto"></audio>';
                         HTMLcontent+= '<div class="skPlayer-picture">';
-                        HTMLcontent+= '    <img src="' + music[0].cover + '" alt="" class="skPlayer-cover">';
+                        HTMLcontent+= '    <img src="' + music[0].cover + '" alt="唱片图片" class="skPlayer-cover">';
                         HTMLcontent+= '    <a href="javascript:;" class="skPlayer-play-btn">';
                         HTMLcontent+= '        <span class="skPlayer-left"></span>';
                         HTMLcontent+= '        <span class="skPlayer-right"></span>';
